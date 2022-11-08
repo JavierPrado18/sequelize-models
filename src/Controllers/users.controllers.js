@@ -40,10 +40,20 @@ const getUserWithTasks = async (req, res) => {
     console.log(error);
   }
 };
-
+//para crear usuario
+const createUser=async(req,res)=>{
+  try {
+    const newUser=req.body;
+    const result=UserServices.add(newUser);
+    res.status(201).json(result);
+  } catch (error) {
+    console.log(error);
+  }
+}
 module.exports = {
   getAllUsers,
   getUserById,
   getUserWithAddres,
   getUserWithTasks,
+  createUser
 };
