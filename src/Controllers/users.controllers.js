@@ -44,7 +44,7 @@ const getUserWithTasks = async (req, res) => {
 const createUser=async(req,res)=>{
   try {
     const newUser=req.body;
-    const result=UserServices.add(newUser);
+    const result= await UserServices.add(newUser);
     res.status(201).json(result);
   } catch (error) {
     console.log(error);

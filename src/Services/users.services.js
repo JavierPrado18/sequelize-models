@@ -80,7 +80,7 @@ class UserServices {
       const result=await Users.create(newUser);
       return result; 
     } catch (error) {
-      throw error
+      throw error;
     }
   }
 }

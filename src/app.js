@@ -7,6 +7,8 @@ const userRoutes = require("./Routes/users.routes");
 //importando dotenv para que maneje las variables de entorno
 require("dotenv").config()
 const app = express();
+//añadinedo el middleware
+app.use(express.json());
 
 const PORT =process.env.PORT || 8000;
 
