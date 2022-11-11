@@ -1,12 +1,13 @@
 const db = require("../utils/database");
 const { DataTypes } = require("sequelize");
+const Users = require("./users.models");
 
 const Tasks = db.define("tasks", {
   id: {
-    primaryKey: true,
     type: DataTypes.INTEGER,
-    autoIncrement: true,
+    primaryKey: true,
     allowNull: false,
+    autoIncrement: true,
   },
   title: {
     type: DataTypes.STRING,
@@ -17,17 +18,17 @@ const Tasks = db.define("tasks", {
   },
   isComplete: {
     type: DataTypes.BOOLEAN,
-    field: "is_complete",
     defaultValue: false,
+    field: "is_complete",
   },
   userId: {
     type: DataTypes.INTEGER,
-    allowNull: false,
     references: {
+      model: Users,
       key: "id",
-      model: "users",
     },
     field: "user_id",
+    allowNull: false,
   },
 });
 

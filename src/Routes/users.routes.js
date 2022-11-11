@@ -1,4 +1,5 @@
 const { Router } = require("express");
+
 const {
   getAllUsers,
   getUserById,
@@ -21,9 +22,8 @@ router.get("/users/:id/address", getUserWithAddres);
 
 router.get("/users/:id/tasks", getUserWithTasks);
 
-//para crar un usuario
-router.post("/users",createUser)
-//para actualizar un usuario
-router.put("/users/:id",updateUser)
+router.post("/users", createUser);
+
+router.put("/users/:id", updateUser);
 
 module.exports = router;

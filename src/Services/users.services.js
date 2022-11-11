@@ -1,7 +1,7 @@
 // importar el modelo donde estaremos haciendo las consultas
 const Address = require("../models/addresses.models");
 const Categories = require("../models/categories.models");
-const TaskCategories = require("../models/taskcategories.models");
+const TaskCategories = require("../models/tasksCategories.models");
 const Tasks = require("../models/tasks.models");
 const Users = require("../models/users.models");
 
@@ -55,7 +55,7 @@ class UserServices {
         attributes: ["username"],
         include: {
           model: Tasks,
-          as: "todo",
+          as: "todos",
           attributes: ["title", "description", "is_complete"],
           include: {
             model: TaskCategories,
@@ -63,7 +63,7 @@ class UserServices {
             attributes: ["category_id"],
             include: {
               model: Categories,
-              as: "categories",
+              as: "category",
               attributes: ["name"],
             },
           },
@@ -74,21 +74,24 @@ class UserServices {
       throw error;
     }
   }
-  //para crear usuario
-  static async add(newUser){
+
+  static async add(newUser) {
     try {
-      const result=await Users.create(newUser);
-      return result; 
+      const result = await Users.create(newUser);
+      return result;
     } catch (error) {
       throw error;
     }
   }
-  static async update(updateData,id){
+
+  static async update(updateData, id) {
     try {
-        const result=await Users.update(updateData,{where:{id}})
-        return result;
+      const result = await Users.update(updateData, {
+        where: { id },
+      });
+      return result;
     } catch (error) {
-      throw error
+      throw error;
     }
   }
 }

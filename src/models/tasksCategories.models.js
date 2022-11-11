@@ -1,32 +1,34 @@
 const db = require("../utils/database");
 const { DataTypes } = require("sequelize");
-const Users = require("./users.models");
+const Categories = require("./categories.models");
+const Tasks = require("./tasks.models");
 
-const Address = db.define(
-  "addresses",
+const TaskCategories = db.define(
+  "task_categories",
   {
     id: {
-      type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
       allowNull: false,
-    },
-    street: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    number: {
       type: DataTypes.INTEGER,
-      allowNull: false,
     },
-    userId: {
+    categoryId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
+        model: Categories,
         key: "id",
-        model: Users,
       },
-      field: "user_id",
+      field: "category_id",
+    },
+    taskId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: Tasks,
+        key: "id",
+      },
+      field: "task_id",
     },
   },
   {
@@ -34,4 +36,4 @@ const Address = db.define(
   }
 );
 
-module.exports = Address;
+module.exports = TaskCategories;

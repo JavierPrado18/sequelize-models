@@ -1,5 +1,6 @@
 const db = require("../utils/database");
 const { DataTypes } = require("sequelize");
+const bcript=require("bcrypt")
 
 const Users = db.define("users", {
   id: {
@@ -24,7 +25,16 @@ const Users = db.define("users", {
     type: DataTypes.STRING,
     allowNull: false,
   },
-});
+},{//ponemos el hhook para la encriptacion
+  hooks:{
+    beforeCreate:(user,options)=>{
+      const {password}=user;//es la contraseña que queremos encriptar
+      const hash=bcript.hashSync(password,8);//devuelve la contra encriptada
+      user.password=hash
+    }
+  }
+}
+);
 
 module.exports = Users;
 
